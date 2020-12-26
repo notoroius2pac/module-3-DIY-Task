@@ -1,0 +1,60 @@
+#%RAML 1.0
+title: AcountsAPI
+
+types:
+  dataType: !include /examples/dataType.raml
+
+/accounts:
+  get:
+    headers:
+      Requester-ID :
+        type: string
+        required: true
+
+    queryParameters:
+      userType: 
+        required: true
+        enum:
+          - personal
+          - business
+      name:
+        required: false
+        type: string
+      country:
+        required: false
+        type: string
+  
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              output: !include /examples/example.raml
+
+  post:
+    headers:
+      Requester-ID :
+        type: string
+        required: true
+        
+    body:
+      application/json:
+        example:
+          input: !include examples/example.raml
+    responses:
+      201:
+        body:
+          application/json:
+            
+            example:
+              output:
+                {
+                  "message": "Account added successfully"
+                }
+
+
+
+
+
+
+
